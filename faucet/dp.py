@@ -42,8 +42,8 @@ class DP(Conf):
     running = False
     name = None
     dp_id = None
-	is_bgp_all = False
-	is_bgp_cache = False
+    is_bgp_all = False
+    is_bgp_cache = False
     configured = False
     table_offset = None
     port_acl_table = None
@@ -87,9 +87,9 @@ class DP(Conf):
         'interfaces': {},
         'table_offset': 0,
         'port_acl_table': None,
-		# used for determining if the dp is to be used for holding all the bgp routes or just the cached version
-		'is_bgp_all': False,
-		'is_bgp_cache': False,
+        # used for determining if the dp is to be used for holding all the bgp routes or just the cached version
+        'is_bgp_all': False,
+        'is_bgp_cache': False,
         # The table for internally associating vlans
         'vlan_table': None,
         'vlan_acl_table': None,
@@ -162,8 +162,8 @@ class DP(Conf):
         'dp_id': int,
         'name': str,
         'interfaces': dict,
-		'is_bgp_all': bool,
-		'is_bgp_cache': bool,
+        'is_bgp_all': bool,
+        'is_bgp_cache': bool,
         'table_offset': int,
         'port_acl_table': int,
         'vlan_table': int,

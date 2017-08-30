@@ -94,8 +94,6 @@ class Faucet(app_manager.RyuApp):
     _CONTEXTS = {
         'dpset': dpset.DPSet,
         'faucet_api': faucet_api.FaucetAPI
-		'bgp_all': ,
-		'bgp_cache': ,
         }
     logname = 'faucet'
     exc_logname = logname + '.exception'
