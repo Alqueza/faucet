@@ -1,6 +1,7 @@
+:version: 1.6.2
+
 Forked from https://github.com/REANNZ/faucet for the purpose of adding a route caching algorithm for bgp routes for my honours project. 
 
-:version: 1.5.7
 
 .. meta::
    :keywords: OpenFlow, Ryu, Faucet, VLAN, SDN
@@ -93,6 +94,3 @@ Faucet deployment around the world
   <div class="figure">
   <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MZ0M9ZtZOp2yHWS0S-BQH0d3e4s" width="640" height="480"></iframe>
   </div>
-
-
-.. Comment- TBD Code not working - embed:: https://www.google.com/maps/d/u/0/viewer?mid=1MZ0M9ZtZOp2yHWS0S-BQH0d3e4s&hl=en
