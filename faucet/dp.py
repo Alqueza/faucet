@@ -214,22 +214,42 @@ class DP(Conf):
     def _configure_tables(self):
         """Configure FAUCET pipeline of tables with matches."""
         self.groups = ValveGroupTable()
-        for table_id, table_config in enumerate((
-                ('port_acl', None),
-                ('vlan', ('eth_dst', 'eth_src', 'eth_type', 'in_port', 'vlan_vid')),
-                ('vlan_acl', None),
-                ('eth_src', ('eth_dst', 'eth_src', 'eth_type',
-                             'icmpv6_type', 'in_port', 'ip_proto', 'vlan_vid')),
-                ('ipv4_fib', ('eth_type', 'ipv4_dst', 'vlan_vid')),
-                ('ipv6_fib', ('eth_type', 'ipv6_dst', 'vlan_vid')),
-                ('vip', ('arp_tpa', 'eth_dst', 'eth_type', 'ip_proto')),
-                ('eth_dst', ('eth_dst', 'in_port', 'vlan_vid')),
-                ('flood', ('eth_dst', 'in_port', 'vlan_vid')))):
-            table_name, restricted_match_types = table_config
-            self.tables[table_name] = ValveTable(
-                table_id, table_name, restricted_match_types,
-                self.cookie, notify_flow_removed=self.use_idle_timeout)
-            self.tables_by_id[table_id] = self.tables[table_name]
+        
+        if self.is_bgp_all:
+            for table_id, table_config in enumerate((
+                    ('port_acl', None),
+                    ('vlan', ('eth_dst', 'eth_src', 'eth_type', 'in_port', 'vlan_vid')),
+                    ('vlan_acl', None),
+                    ('eth_src', ('eth_dst', 'eth_src', 'eth_type',
+                                 'icmpv6_type', 'in_port', 'ip_proto', 'vlan_vid')),
+                    ('bgp_route_precache', ('eth_type', 'ipv4_dst', 'ipv6_dst', 'vlan_vid')),
+                    ('ipv4_fib', ('eth_type', 'ipv4_dst', 'vlan_vid')),
+                    ('ipv6_fib', ('eth_type', 'ipv6_dst', 'vlan_vid')),
+                    ('vip', ('arp_tpa', 'eth_dst', 'eth_type', 'ip_proto')),
+                    ('eth_dst', ('eth_dst', 'in_port', 'vlan_vid')),
+                    ('flood', ('eth_dst', 'in_port', 'vlan_vid')))):
+                table_name, restricted_match_types = table_config
+                self.tables[table_name] = ValveTable(
+                    table_id, table_name, restricted_match_types,
+                    self.cookie, notify_flow_removed=self.use_idle_timeout)
+                self.tables_by_id[table_id] = self.tables[table_name]
+        else:
+            for table_id, table_config in enumerate((
+                    ('port_acl', None),
+                    ('vlan', ('eth_dst', 'eth_src', 'eth_type', 'in_port', 'vlan_vid')),
+                    ('vlan_acl', None),
+                    ('eth_src', ('eth_dst', 'eth_src', 'eth_type',
+                                 'icmpv6_type', 'in_port', 'ip_proto', 'vlan_vid')),
+                    ('ipv4_fib', ('eth_type', 'ipv4_dst', 'vlan_vid')),
+                    ('ipv6_fib', ('eth_type', 'ipv6_dst', 'vlan_vid')),
+                    ('vip', ('arp_tpa', 'eth_dst', 'eth_type', 'ip_proto')),
+                    ('eth_dst', ('eth_dst', 'in_port', 'vlan_vid')),
+                    ('flood', ('eth_dst', 'in_port', 'vlan_vid')))):
+                table_name, restricted_match_types = table_config
+                self.tables[table_name] = ValveTable(
+                    table_id, table_name, restricted_match_types,
+                    self.cookie, notify_flow_removed=self.use_idle_timeout)
+                self.tables_by_id[table_id] = self.tables[table_name]
 
     def set_defaults(self):
         super(DP, self).set_defaults()

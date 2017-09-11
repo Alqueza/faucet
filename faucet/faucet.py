@@ -345,7 +345,10 @@ class Faucet(app_manager.RyuApp):
         valve = self._get_valve(ryu_dp, 'packet_in_handler', msg)
         if valve is None:
             return
-
+        
+        if valve.is_bgp_all:
+            #TODO: create add rule msg that will add /24 or /56 with next hop to precache
+        
         in_port = msg.match['in_port']
         # eth/VLAN header only
         pkt, vlan_vid = valve_packet.parse_packet_in_pkt(msg.data, max_len=(14 + 4))
